@@ -35,5 +35,7 @@ logs/
 dist/
 build/
 *.DS_Store
+
+# Ignore Visual Studio files and folders
 vs/
 *.vsidx
