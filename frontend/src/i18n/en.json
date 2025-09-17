@@ -1,0 +1,17 @@
+/* frontend/src/i18n/en.json */
+
+{
+  "app.title": "Retail Insights",
+  "pos.title": "POS Billing",
+  "pos.product_name": "Product Name (e.g., saree)",
+  "pos.add_item": "Add Item",
+  "pos.customer_phone": "Customer Phone (optional)",
+  "pos.consent": "I consent to store customer data for loyalty",
+  "pos.checkout": "Checkout",
+  "pos.processing": "Processing...",
+  "consent.title": "Privacy Consent",
+  "consent.message": "We need your consent to process customer data for loyalty and analytics.",
+  "consent.accept": "Accept",
+  "consent.deny": "Deny",
+  "consent_required": "Consent required for customer phone"
+}

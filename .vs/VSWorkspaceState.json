@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github\\workflows",
+    "\\backend\\alembic\\versions",
+    "\\backend\\app\\tests",
+    "\\frontend\\src\\i18n",
+    "\\mobile\\lib\\core",
+    "\\mobile\\lib\\core\\sync",
+    "\\mobile\\test"
+  ],
+  "SelectedNode": "\\docs",
+  "PreviewInSolutionExplorer": false
+}

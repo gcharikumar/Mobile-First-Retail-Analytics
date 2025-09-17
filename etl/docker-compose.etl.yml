@@ -1,0 +1,23 @@
+# etl/docker-compose.etl.yml
+"""
+Docker Compose for ETL: Runs Prefect worker, Redis.
+Connects to Postgres from main docker-compose.yml.
+"""
+version: '3.8'
+services:
+  prefect-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.etl
+    environment:
+      - PREFECT_API_URL=http://prefect:4200/api
+      - DATABASE_URL=${DATABASE_URL}
+      - S3_BUCKET=${S3_BUCKET}
+    depends_on:
+      - redis
+    volumes:
+      - ./flows:/flows
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"

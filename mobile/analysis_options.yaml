@@ -1,0 +1,10 @@
+# mobile/analysis_options.yaml
+"""
+Flutter lint rules for code quality.
+"""
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - avoid_print
+    - prefer_const_constructors

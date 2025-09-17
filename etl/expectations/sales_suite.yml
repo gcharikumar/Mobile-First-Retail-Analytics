@@ -1,0 +1,20 @@
+# etl/expectations/sales_suite.yml
+"""
+Great Expectations: Validation rules for sales data.
+Checks schema, nulls, ranges.
+"""
+expectations:
+  - expectation_type: expect_column_to_exist
+    kwargs:
+      column: product_name
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: tenant_id
+  - expectation_type: expect_column_values_to_be_of_type
+    kwargs:
+      column: quantity
+      type_: integer
+  - expectation_type: expect_column_values_to_be_greater_than
+    kwargs:
+      column: price
+      value: 0

@@ -1,0 +1,17 @@
+﻿/* frontend/src/i18n/mr.json (Marathi) */
+
+{
+  "app.title": "रिटेल इनसाइट्स",
+  "pos.title": "पीओएस बिलिंग",
+  "pos.product_name": "उत्पादाचे नाव (उदा., साडी)",
+  "pos.add_item": "आयटम जोडा",
+  "pos.customer_phone": "ग्राहक फोन (पर्यायी)",
+  "pos.consent": "मी ग्राहक डेटा लॉयल्टीसाठी साठवण्यास संमती देतो",
+  "pos.checkout": "चेकआउट",
+  "pos.processing": "प्रक्रिया करत आहे...",
+  "consent.title": "गोपनीयता संमती",
+  "consent.message": "ग्राहक डेटा लॉयल्टी आणि विश्लेषणासाठी प्रक्रिया करण्यासाठी तुमच्या संमतीची आवश्यकता आहे.",
+  "consent.accept": "स्वीकारा",
+  "consent.deny": "नकार द्या",
+  "consent_required": "ग्राहक फोनसाठी संमती आवश्यक आहे"
+}

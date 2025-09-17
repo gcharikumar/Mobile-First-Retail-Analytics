@@ -1,0 +1,44 @@
+# .github/workflows/cd-deploy.yml
+"""
+CD: Deploy to prod on merge to main.
+Uses Docker push to ECR (AWS), then ECS update.
+Secrets: AWS creds in GitHub.
+DPDP: Ensure Mumbai region.
+"""
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production  # Approvals
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1  # Mumbai for DPDP
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Build & Push Backend
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -f Dockerfile.backend -t $ECR_REGISTRY/retail-backend:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/retail-backend:$IMAGE_TAG
+      - name: Deploy to ECS
+        run: aws ecs update-service --cluster retail-cluster --service backend-service --force-new-deployment
+      - name: Deploy PWA to S3
+        run: aws s3 sync frontend/dist/ s3://retail-pwa-bucket --delete
+      - name: Deploy Flutter APK
+        run: |
+          flutter build apk --release
+          aws s3 cp build/app/outputs/flutter-apk/app-release.apk s3://retail-mobile-bucket/
+      - name: Run ETL Deployment
+        run: prefect deployment apply etl/prefect.yaml -f  # Assumes Prefect CLI

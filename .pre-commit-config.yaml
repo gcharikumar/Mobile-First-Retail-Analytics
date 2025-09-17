@@ -1,0 +1,19 @@
+# .pre-commit-config.yaml
+"""
+Pre-commit hooks: Linting, formatting, security.
+Install: pre-commit install
+"""
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ["-r", "backend"]

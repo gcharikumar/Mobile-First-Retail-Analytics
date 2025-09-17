@@ -1,0 +1,31 @@
+# .github/workflows/ci-frontend.yml
+"""
+CI for frontend: Lint, test, build.
+Runs on push/PR to frontend files.
+"""
+name: Frontend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths: ['frontend/**']
+  pull_request:
+    paths: ['frontend/**']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: cd frontend && npm install
+      - name: Lint
+        run: cd frontend && npm run lint  # Add eslint in package.json
+      - name: Test
+        run: cd frontend && npm run test
+      - name: Build
+        run: cd frontend && npm run build

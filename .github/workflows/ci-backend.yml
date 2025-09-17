@@ -1,0 +1,33 @@
+# .github/workflows/ci-backend.yml
+/**
+ * CI: Lint, test, build, security scan.
+ * Runs on push/PR to main/develop.
+ */
+name: Backend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths: ['backend/**']
+  pull_request:
+    paths: ['backend/**']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install -r backend/requirements.txt
+      - name: Lint
+        run: black --check backend/ && flake8 backend/
+      - name: Test
+        run: pytest backend/tests/ --cov=backend --cov-report=xml
+      - name: Security Scan
+        uses: pre-commit/action@v3  # Includes bandit for vuln scan
+      - name: Build Docker
+        run: docker build -f Dockerfile.backend -t retail-backend .

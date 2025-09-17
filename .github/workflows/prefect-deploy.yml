@@ -1,0 +1,29 @@
+# .github/workflows/prefect-deploy.yml
+"""
+Deploy Prefect flows to orchestrator.
+Runs on push to ETL files.
+"""
+name: Deploy ETL Flows
+
+on:
+  push:
+    branches: [main]
+    paths: ['etl/**']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install -r etl/requirements.txt
+      - name: Deploy flows
+        env:
+          PREFECT_API_KEY: ${{ secrets.PREFECT_API_KEY }}
+        run: |
+          cd etl
+          prefect deployment apply prefect.yaml

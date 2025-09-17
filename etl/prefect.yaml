@@ -1,0 +1,16 @@
+# etl/prefect.yaml
+"""
+Prefect Deployment Config: Schedules daily pulse, ingestion on trigger.
+Use: prefect deployment build flows/ingestion.py:ingestion_flow -f prefect.yaml
+"""
+name: retail-etl
+description: ETL for retail data
+schedule:
+  cron: "0 0 * * *"  # Daily midnight for pulse
+  timezone: "Asia/Kolkata"  # India
+infrastructure:
+  type: docker-container
+  labels: { region: mumbai }  # DPDP
+parameters:
+  s3_key: "{{ $DYNAMIC.s3_key }}"
+  tenant_id: "{{ $DYNAMIC.tenant_id }}"
