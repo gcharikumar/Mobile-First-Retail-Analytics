@@ -1,0 +1,39 @@
+# .gitignore
+"""
+Standard ignores for Python, Flutter, Node.js.
+"""
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Flutter
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.pub-cache/
+mobile/.pub/
+mobile/ios/Pods/
+mobile/ios/Podfile.lock
+
+# Node.js
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# General
+.env
+*.log
+logs/
+dist/
+build/
+*.DS_Store
+vs/
+*.vsidx
